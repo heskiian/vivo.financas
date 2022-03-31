@@ -1,11 +1,14 @@
 package com.vivo.minhasfinancas.model.entity;
 
 import java.math.BigDecimal;
+
 import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +18,15 @@ import javax.persistence.Table;
 
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
+import com.vivo.minhasfinancas.model.enums.StatusLancamento;
+import com.vivo.minhasfinancas.model.enums.TipoLancamento;
+
+import lombok.Builder;
+import lombok.Data;
+
+
+@Data
+@Builder
 @Entity
 @Table( name = "lancamento", schema= "financas")
 public class Lançamento {
@@ -24,7 +36,10 @@ public class Lançamento {
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = ",es")
+	@Column(name="descricao")
+	private String descricao;
+	
+	@Column(name = "mes")
 	private Integer mes;
 	
 	@Column(name = "ano")
@@ -41,5 +56,12 @@ public class Lançamento {
 	@Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
 	private LocalDate dataCadastro;
 	
+	@Column(name ="tipo")
+	@Enumerated(value = EnumType.STRING)
+	private TipoLancamento tipo;
+	
+	@Column(name = "status")
+	@Enumerated(value = EnumType.STRING)
+	private StatusLancamento status;
 	
 }

@@ -8,11 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Entity
-@Data
 @Table( name= "usuario", schema = "financas")
+@Data
+@Builder
 public class Usuario {
 	
 	@Column(name = "id")
